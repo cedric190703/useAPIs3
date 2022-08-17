@@ -8,7 +8,7 @@
       <option value ="Nordic cross">Nordic cross</option>
       <option value ="Scandinavian cross">Scandinavian cross</option>
       <option value ="Saltire bicolor">Saltire bicolor</option>
-      </select> 
+      </select>
       <label for="color1">color1</label>
       <input type="color" @change="changeColor(1)" v-model="color1" name="color1">
       <label for="color2">color2</label>
@@ -17,7 +17,12 @@
       <input type="color" @change="changeColor(3)" v-model="color3" name="color3">
     </div>
     <div class="element">
-      <canvas id="flag-france" width="150px" height="100px" style="border: 1px solid #D3D3D3"></canvas>    </div>
+      <HorizontalTricolor />
+      <NordicCross />
+      <SaltireBicolor />
+      <ScandinavianCross />
+      <VerticalTricolor />
+    </div>
     <div class="download">
       <button @click="download()">Download the flag</button>
     </div>
@@ -26,20 +31,25 @@
 
 <script>
 import {ref} from 'vue'
-import {horizontalTricolor} from '../components/HorizontalTricolor.vue'
-import {nordicCross} from '../components/NordicCross.vue'
-import {saltireBicolor} from '../components/SaltireBicolor.vue'
-import {scandinavianCross} from '../components/ScandinavianCross.vue'
-import {verticalTricolor} from '../components/VerticalTricolor.vue'
+import HorizontalTricolor from '../components/HorizontalTricolor.vue'
+import NordicCross from '../components/NordicCross.vue'
+import SaltireBicolor from '../components/SaltireBicolor.vue'
+import ScandinavianCross from '../components/ScandinavianCross.vue'
+import VerticalTricolor from '../components/VerticalTricolor.vue'
 
 export default {
   name: 'HomeView',
-  components: {horizontalTricolor,nordicCross,saltireBicolor,scandinavianCross,verticalTricolor},
+  components: { 
+    HorizontalTricolor, 
+    NordicCross, 
+    SaltireBicolor,
+    ScandinavianCross,
+    VerticalTricolor},
   setup() {
     const color1 = ref('');
     const color2 = ref('');
     const color3 = ref('');
-    const type = ref('');
+    const type = ref('Vertical tricolor');
 
     const download = () => {
 
@@ -57,6 +67,10 @@ export default {
 </script>
 
 <style scoped>
+  .home {
+    color: white;
+  }
+
   input {
     margin: 2%;
     width: 10%;
@@ -65,5 +79,14 @@ export default {
 
   .element {
     height: 500px;
+  }
+
+  select {
+    height: 30px;
+    width: 10%;
+    font-size: large;
+    margin: 2%;
+    border-radius: 8px;
+    border: none;
   }
 </style>
