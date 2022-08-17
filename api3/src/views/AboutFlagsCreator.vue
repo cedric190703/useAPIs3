@@ -17,14 +17,25 @@
       <input type="color" @change="changeColor(3)" v-model="color3" name="color3">
     </div>
     <div class="element">
-      <HorizontalTricolor />
-      <NordicCross />
+      <HorizontalTricolor>
+        <template v-slot:color1>
+          <h1> {{ color1 }} </h1>
+        </template>
+        <template v-slot:color2>
+          <h1> {{ color2 }} </h1>
+        </template>
+        <template v-slot:color3>
+          <h1> {{ color3 }} </h1>
+        </template>
+      </HorizontalTricolor>
+      <NordicCross>
+      </NordicCross>
       <SaltireBicolor />
       <ScandinavianCross />
       <VerticalTricolor />
     </div>
     <div class="download">
-      <button @click="download()">Download the flag</button>
+      <a download=""  href="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&amp;dl=Blastar.jpg&amp;fm=jpg"><button>Download</button></a>
     </div>
   </div>
 </template>
@@ -46,21 +57,37 @@ export default {
     ScandinavianCross,
     VerticalTricolor},
   setup() {
-    const color1 = ref('');
-    const color2 = ref('');
-    const color3 = ref('');
+    const color1 = ref('#000000');
+    const color2 = ref('#000000');
+    const color3 = ref('#000000');
     const type = ref('Vertical tricolor');
+    const image = ref('');
+    const name = ref('Blastar');
 
-    const download = () => {
-
-    };
+    // const download = () => {
+    //   fetch(image)
+    //     .then(resp => resp.blob())
+    //     .then(blobobject => {
+    //         const blob = window.URL.createObjectURL(blobobject);
+    //         const anchor = document.createElement('a');
+    //         anchor.style.display = 'none';
+    //         anchor.href = blob;
+    //         anchor.download = name.value+'';
+    //         document.body.appendChild(anchor);
+    //         anchor.click();
+    //         window.URL.revokeObjectURL(blob);
+    //     })
+    //     .catch(() => console.log('An error in downloadin gthe file sorry'));
+    // };
 
     return {
       color1,
       color2,
       color3,
       type,
-      download
+      // download,
+      image,
+      name
     }
   }
 }
@@ -77,10 +104,6 @@ export default {
     height: 50px;
   }
 
-  .element {
-    height: 500px;
-  }
-
   select {
     height: 30px;
     width: 10%;
@@ -88,5 +111,20 @@ export default {
     margin: 2%;
     border-radius: 8px;
     border: none;
+  }
+
+  button {
+    width: 10%;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
+    font-size: large;
+  }
+
+  button:hover{
+    background-color: black;
+    color: white;
+    border: 2px solid white;
   }
 </style>
